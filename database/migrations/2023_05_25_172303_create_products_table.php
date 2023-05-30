@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->integer('price');
-            $table->integer('quantity');
+            $table->double('price');
+            $table->integer('quantity')->nullable();
             $table->string('unit')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);

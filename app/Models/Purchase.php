@@ -16,4 +16,9 @@ class Purchase extends Model
         'total_amount',
         'note',
     ];
+
+    public function purchaseDetails()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
 }
