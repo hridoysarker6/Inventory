@@ -17,7 +17,8 @@ class Purchase extends Model
         'note',
     ];
 
-    public function purchaseDetails(){
+    public function purchaseDetails()
+    {
         return $this->hasMany(PurchaseDetail::class);
     }
 }

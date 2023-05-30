@@ -116,13 +116,14 @@
                     />
                     <span v-if="errors.product_id" class="text-danger">{{ errors.product_id[0] }}</span>
                   </div>
-                  <div class="col">
+                  <div class="col d-flex">
                     <input
                       type="text"
                       class="form-control"
                       v-model="item.productStock"
                       disabled
                     />
+                   <span style="padding : 6px ; padding-top:7px; border: 1px solid #d9dbde;border-radius: 4px; background-color: #f1f5f9; ">{{ item.productUnit }}</span> 
 
                   </div>
                   <div class="col">
@@ -230,6 +231,7 @@ export default {
             productName: null,
             productUnit: null,
             productStock: null,
+            productUnit : null,
           },
         ],
         total_amount: null,
@@ -263,7 +265,7 @@ export default {
             },
           })
           .then((response) => {
-            console.log(response.data);
+             
             this.suppliers = response.data.data;
           });
       } catch (error) {
@@ -284,8 +286,10 @@ export default {
             }
           )
           .then((response) => {
-            console.log('re')
-            alert(response.data.message);
+             
+            // alert(response.data.message);
+            console.log((responnse.data))
+            // this.$router.push('/product');
           }) .catch((error) => {
             console.log(error.response.data.errors)
             if (error.response && error.response.status === 422) {
@@ -321,6 +325,7 @@ export default {
         productName: product.name,
         productUnit: product.unit,
         productStock: product.quantity,
+        productUnit : product.unit,
         product_id: product.id,
         quantity: null,
         price: product.price,

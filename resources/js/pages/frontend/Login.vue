@@ -62,7 +62,7 @@ export default {
        const token =  response.data.data.access.token;
         localStorage.setItem('token', token);
         localStorage.setItem('user', response.data.data.user);
-       
+        window.location.reload();
         this.$router.push("/product");
       } catch (error) {
         console.error(error);

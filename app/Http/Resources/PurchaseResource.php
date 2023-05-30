@@ -21,7 +21,7 @@ class PurchaseResource extends JsonResource
             'supplier_id' => $this->supplier_id,
             'total_amount' => $this->total_amount,
             'note' => $this->note,
-            'purchase_details' => PurchaseDetailResource::collection($this->whenLoaded('purchaseDetails')),
+            'purchase_details' => PurchaseDetailResource::collection($this->purchaseDetails),
         ];
     }
 }

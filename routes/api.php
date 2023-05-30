@@ -26,11 +26,11 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('active-products', [ProductController::class, 'getActiveProduct']);
 
 Route::middleware(['api', 'auth:sanctum'])->group(function () {
-Route::post('logout', [LoginController::class, 'logout']);
+    Route::post('logout', [LoginController::class, 'logout']);
 
-Route::apiResource('products', ProductController::class);
+    Route::apiResource('products', ProductController::class);
 
-Route::get('suppliers', [SupplierController::class, 'index']);
+    Route::get('suppliers', [SupplierController::class, 'index']);
 
-Route::post('purchases', [PurchaseController::class, 'store']);
+    Route::post('purchases', [PurchaseController::class, 'store']);
 });

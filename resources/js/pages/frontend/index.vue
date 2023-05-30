@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pb-5">
     <h1>Product Listing</h1>
     <div class="row">
       <div class="col-md-4" v-for="product in products" :key="product.id">
@@ -13,52 +13,34 @@
         </div>
       </div>
     </div>
-    <paginate
-      :page-count="totalPages"
-      :click-handler="changePage"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'pagination'"
-      :page-class="'page-item'"
-      :prev-class="'page-item'"
-      :next-class="'page-item'"
-      :active-class="'active'"
-      :disabled-class="'disabled'"
-    ></paginate>
+ 
+    <div v-if="products.length>0"> 
+       <pagination :pagination="pagination" @page-changed="fetchProducts"></pagination>
+    </div>
   </div>
 </template>
   
   <script>
 import axios from "axios";
-// import Paginate from 'vuejs-paginate'
+ 
 export default {
-//     components: {
-//     // Paginate, 
-//   },
+    components: {
+ 
+  },
   data() {
     return {
       products: [],
-      currentPage: 1,
-      productsPerPage: 9
     };
   },
-  computed: {
-    displayedProducts() {
-      const start = (this.currentPage - 1) * this.productsPerPage;
-      const end = start + this.productsPerPage;
-      return this.products.slice(start, end);
-    },
-    totalPages() {
-      return Math.ceil(this.products.length / this.productsPerPage);
-    },
-  },
+ 
   mounted() {
     this.fetchProducts();
   },
   methods: {
-    async fetchProducts() {
+    async fetchProducts(page=1) {
       try {
-        var response = await axios.get("/api/active-products");
+        var response = await axios.get(`/api/active-products?page=${page}`);
+        this.pagination = response.data.meta;
         this.products = response.data.data;
       } catch (error) {
         console.error("Error fetching products:", error);
