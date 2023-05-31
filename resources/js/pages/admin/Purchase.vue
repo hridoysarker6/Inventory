@@ -22,13 +22,13 @@
                     id="date"
                     v-model="purchase.date"
                     class="form-control"
-                   required
+                    required
                   />
-                  <span v-if="errors.date" class="text-danger">{{ errors.date[0] }}</span>
+                  <span v-if="errors.date" class="text-danger">{{
+                    errors.date[0]
+                  }}</span>
                 </div>
               </div>
-             
-
 
               <div class="col">
                 <div class="form-group">
@@ -42,7 +42,9 @@
                     class="form-control"
                     required
                   />
-                  <span v-if="errors.invoice_no" class="text-danger">{{ errors.invoice_no[0] }}</span>
+                  <span v-if="errors.invoice_no" class="text-danger">{{
+                    errors.invoice_no[0]
+                  }}</span>
                 </div>
               </div>
 
@@ -53,7 +55,6 @@
                     id="supplier_id"
                     v-model="purchase.supplier_id"
                     class="form-control"
-                     
                   >
                     <option value="">Select Supplier</option>
 
@@ -66,7 +67,9 @@
                     </option>
                   </select>
 
-                  <span v-if="errors.supplier_id" class="text-danger">{{ errors.supplier_id[0] }}</span>
+                  <span v-if="errors.supplier_id" class="text-danger">{{
+                    errors.supplier_id[0]
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -114,7 +117,9 @@
                       v-model="item.productName"
                       disabled
                     />
-                    <span v-if="errors.product_id" class="text-danger">{{ errors.product_id[0] }}</span>
+                    <span v-if="errors.product_id" class="text-danger">{{
+                      errors.product_id[0]
+                    }}</span>
                   </div>
                   <div class="col d-flex">
                     <input
@@ -123,19 +128,26 @@
                       v-model="item.productStock"
                       disabled
                     />
-                   <span style="padding : 6px ; padding-top:7px; border: 1px solid #d9dbde;border-radius: 4px; background-color: #f1f5f9; ">{{ item.productUnit }}</span> 
-
+                    <span
+                      style="
+                        padding: 6px;
+                        padding-top: 7px;
+                        border: 1px solid #d9dbde;
+                        border-radius: 4px;
+                        background-color: #f1f5f9;
+                      "
+                      >{{ item.productUnit }}</span
+                    >
                   </div>
                   <div class="col">
                     <input
                       type="number"
                       v-model="item.quantity"
                       class="form-control"
-                       required
+                      required
                       placeholder="quantity"
                       @input="calculateTotals"
                     />
-                  
                   </div>
                   <div class="col">
                     <input
@@ -192,7 +204,9 @@
                     class="form-control"
                     required
                   />
-                  <span v-if="errors.total_amount" class="text-danger">{{ errors.total_amount[0] }}</span>
+                  <span v-if="errors.total_amount" class="text-danger">{{
+                    errors.total_amount[0]
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -231,7 +245,7 @@ export default {
             productName: null,
             productUnit: null,
             productStock: null,
-            productUnit : null,
+            productUnit: null,
           },
         ],
         total_amount: null,
@@ -265,7 +279,6 @@ export default {
             },
           })
           .then((response) => {
-             
             this.suppliers = response.data.data;
           });
       } catch (error) {
@@ -286,21 +299,19 @@ export default {
             }
           )
           .then((response) => {
-             
-            // alert(response.data.message);
-            console.log((responnse.data))
-            // this.$router.push('/product');
-          }) .catch((error) => {
-            console.log(error.response.data.errors)
+            alert(response.data.message);
+            this.$router.push("/product");
+          })
+          .catch((error) => {
+            
             if (error.response && error.response.status === 422) {
-            this.errors = error.response.data.errors;
-          } else {
-            console.log(error);
-          }
+              this.errors = error.response.data.errors;
+            } else {
+              console.log(error);
+            }
           });
       } catch (error) {
-        console.log('sdf')
-        
+        console.log(error);
       }
     },
     productSearch() {
@@ -325,7 +336,7 @@ export default {
         productName: product.name,
         productUnit: product.unit,
         productStock: product.quantity,
-        productUnit : product.unit,
+        productUnit: product.unit,
         product_id: product.id,
         quantity: null,
         price: product.price,
@@ -335,7 +346,6 @@ export default {
       var previousItem = this.purchase.purchase_items.filter(function (item) {
         return item.product_id !== null;
       });
-      console.log(previousItem);
 
       this.purchase.purchase_items = [...previousItem, newPurchaseItem];
       this.searchKey = "";
